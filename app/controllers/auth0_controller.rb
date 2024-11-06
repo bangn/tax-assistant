@@ -6,6 +6,7 @@ class Auth0Controller < ApplicationController
     # Refer to https://github.com/auth0/omniauth-auth0#authentication-hash for complete information on 'omniauth.auth' contents.
     session[:userinfo] = request.env["omniauth.auth"]["extra"]["raw_info"]
 
+    User.from_omniauth(session[:userinfo])
     redirect_to "/dashboard"
   end
 
