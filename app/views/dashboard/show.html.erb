@@ -1,12 +1,12 @@
-<section class="jumbotron  text-center">
-  <h2><img class="jumbo-thumbnail" src="<%= @user.picture %>"/></h2>
-  <h1>Welcome, <%= @user.name %></h1>
+<section class="py-12 px-4 text-center bg-gray-100">
+  <h2><img class="w-24 h-24 rounded-full mx-auto" src="<%= @user.picture %>"/></h2>
+  <h1 class="text-3xl font-bold mt-4">Welcome, <%= @user.name %></h1>
 </section>
-<section class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">Normalized User Profile</div>
-    <div class="panel-body">
-      <pre><%= JSON.pretty_generate(@user) %></pre>
+<section class="container mx-auto px-4 py-6">
+  <div class="bg-white rounded-lg shadow">
+    <div class="px-4 py-3 bg-gray-50 border-b border-gray-200 font-medium">Normalized User Profile</div>
+    <div class="p-4">
+      <pre class="bg-gray-50 p-4 rounded"><%= JSON.pretty_generate(@user) %></pre>
     </div>
   </div>
 </section>

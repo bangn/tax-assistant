@@ -1,4 +1,12 @@
-<div class="redirecting">Redirecting...</div>
-<%= button_to 'Login', '/auth/auth0', method: :post,  style: "display:none;", id: 'redirect' %>
+<div class="text-center text-gray-600 text-lg">Redirecting...</div>
+<%= button_to 'Login', '/auth/auth0',
+    method: :post,
+    class: "hidden",
+    id: 'redirect' %>
 <script>document.getElementById('redirect').form.submit()</script>
-<noscript><style type="text/css"> #redirect { display:block !important; } .redirecting { display: none; }</style></noscript>
+<noscript>
+  <style type="text/css">
+    #redirect { display: block !important; }
+    .text-center.text-gray-600 { display: none; }
+  </style>
+</noscript>

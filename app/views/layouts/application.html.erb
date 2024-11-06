@@ -4,34 +4,31 @@
   <title>RubyOnRails Auth0 Sample</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= yield :cdn_code %>
-  <%= stylesheet_link_tag    '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' %>
-  <%= stylesheet_link_tag    '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' %>
   <%= javascript_include_tag 'application' %>
-
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <% flash.each do |key, value| %>
-         <div class= "alert-success"><%= value %></div>
-        <% end %>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="<%= 'active' if params[:controller] == 'home' %>"><a href="/">Home</a></li>
-            <% if session[:userinfo] %>
-              <li class="<%= 'active' if params[:controller] == 'dashboard' %>"><a href="/dashboard">My Dashboard</a></li>
-            <% end %>
-          </ul>
+  <nav class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <% flash.each do |key, value| %>
+       <div class="bg-green-100 text-green-700 p-4 rounded"><%= value %></div>
+      <% end %>
+      <div class="flex items-center justify-between h-16">
+        <ul class="flex space-x-4">
+          <li><a href="/" class="<%= params[:controller] == 'home' ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900' %> px-3 py-2 rounded-md text-sm font-medium">Home</a></li>
           <% if session[:userinfo] %>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="<%= 'active' if params[:controller] == 'logout' %>"><a id="qsLogoutBtn" href="/auth/logout">Logout</a></li>
-            </ul>
+            <li><a href="/dashboard" class="<%= params[:controller] == 'dashboard' ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900' %> px-3 py-2 rounded-md text-sm font-medium">My Dashboard</a></li>
           <% end %>
-        </div>
+        </ul>
+        <% if session[:userinfo] %>
+          <div class="flex">
+            <a id="qsLogoutBtn" href="/auth/logout" class="<%= params[:controller] == 'logout' ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900' %> px-3 py-2 rounded-md text-sm font-medium">Logout</a>
+          </div>
+        <% end %>
       </div>
-    </nav>
-  <div class="container">
+    </div>
+  </nav>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <%= yield %>
   </div>
 </body>
