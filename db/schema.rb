@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_06_030950) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_06_051227) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "receipts", force: :cascade do |t|
+    t.string "receipt_number"
+    t.integer "total_amount", null: false
+    t.string "seller"
+    t.string "note"
+    t.date "date"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["date"], name: "index_receipts_on_date"
+    t.index ["receipt_number"], name: "index_receipts_on_receipt_number"
+    t.index ["seller"], name: "index_receipts_on_seller"
+    t.index ["total_amount"], name: "index_receipts_on_total_amount"
+    t.index ["user_id"], name: "index_receipts_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "given_name"
@@ -26,4 +42,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_030950) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
+
+  add_foreign_key "receipts", "users"
 end
