@@ -4,29 +4,32 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Tax Assistant
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
-    = yield :cdn_code
-    = javascript_include_tag 'application'
     = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
   %body.flex.flex-col.min-h-screen
     // Header with login link
     %header.bg-white.border-b.border-gray-200
       .max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
         .flex.items-center.justify-between.h-16
-          // Flash messages
-          - flash.each do |key, value|
-            .bg-green-100.text-green-700.p-4.rounded= value
+          .flex.items-center
+            Logo goes here
 
-          // Navigation items
           .flex.items-center.space-x-4
             - if session[:userinfo]
-              %a{:href => "/auth/logout"} Logout
+              %a.text-gray-600.hover:text-gray-900{:href => "/auth/logout"} Logout
             - else
-              = button_to 'Login', '/auth/auth0', method: :post
+              = button_to 'Login', '/auth/auth0', method: :post, class: "text-gray-600 hover:text-gray-900"
 
     // Main content
     %main.flex-grow
       .max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
-        .text-xl Your Tax Assistant
+        .flex.justify-center.items-center.space-x-4
+          // Flash messages
+          - flash.each do |key, value|
+            .bg-green-100.text-green-700.p-4.rounded
+              = value
         = yield
 
     // Footer
