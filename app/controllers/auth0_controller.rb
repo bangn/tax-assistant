@@ -7,7 +7,7 @@ class Auth0Controller < ApplicationController
     session[:userinfo] = request.env["omniauth.auth"]["extra"]["raw_info"]
 
     User.from_omniauth(session[:userinfo])
-    redirect_to "/dashboard"
+    redirect_to "/receipt"
   end
 
   # if user authentication fails on the provider side OmniAuth will redirect to /auth/failure,

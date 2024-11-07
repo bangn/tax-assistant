@@ -1,12 +1,12 @@
 class ReceiptsController < ApplicationController
+  include Secured
+
   def index
     @receipts = Receipt.all
 
     # Handle search
     if params[:search].present?
-      @receipts = @receipts.where("vendor ILIKE ? OR category ILIKE ?",
-                                 "%#{params[:search]}%",
-                                 "%#{params[:search]}%")
+      @receipts = @receipts.where("seller ILIKE ?", "%#{params[:search]}%")
     end
 
     # Handle date filter
@@ -34,25 +34,9 @@ class ReceiptsController < ApplicationController
     end
   end
 
-  def export
-    @receipts = Receipt.order(date: :desc)
-
-    respond_to do |format|
-      format.csv do
-        headers["Content-Disposition"] = 'attachment; filename="receipts.csv"'
-        headers["Content-Type"] ||= "text/csv"
-      end
-    end
-  end
-
-  def capture
-    # Redirect to a camera capture page or handle mobile camera functionality
-    render :capture
-  end
-
   private
 
   def receipt_params
-    params.require(:receipt).permit(:image, :seller, :amount, :date)
+    params.require(:receipt).permit(:image, :seller, :total_amount, :date)
   end
 end
