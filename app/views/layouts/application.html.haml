@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title RubyOnRails Auth0 Sample
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    = yield :cdn_code
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    %nav.bg-white.border-b.border-gray-200
+      .max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
+        - flash.each do |key, value|
+          .bg-green-100.text-green-700.p-4.rounded= value
+        .flex.items-center.justify-between.h-16
+          %ul.flex.space-x-4
+            %li
+              %a{:class => "#{params[:controller] == 'home' ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'} px-3 py-2 rounded-md text-sm font-medium", :href => "/"} Home
+            - if session[:userinfo]
+              %li
+                %a{:class => "#{params[:controller] == 'dashboard' ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'} px-3 py-2 rounded-md text-sm font-medium", :href => "/dashboard"} My Dashboard
+          - if session[:userinfo]
+            .flex
+              %a#qsLogoutBtn{:class => "#{params[:controller] == 'logout' ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'} px-3 py-2 rounded-md text-sm font-medium", :href => "/auth/logout"} Logout
+    .max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
+      = yield
