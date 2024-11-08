@@ -1,4 +1,4 @@
-class CreateReceipts < ActiveRecord::Migration[7.2]
+class CreateReceipts < ActiveRecord::Migration[8.0]
   def change
     create_table :receipts do |t|
       t.string :receipt_number
