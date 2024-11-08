@@ -1,6 +1,8 @@
 class ReceiptsController < ApplicationController
   include Secured
 
+  before_action :set_current_user
+
   def index
     @receipts = Receipt.all
 
@@ -19,8 +21,7 @@ class ReceiptsController < ApplicationController
   end
 
   def create
-    @receipt = Receipt.new(receipt_params)
-
+    @receipt = @current_user.receipts.new(receipt_params)
     if @receipt.save
       respond_to do |format|
         format.html { redirect_to receipts_path, notice: "Receipt was successfully uploaded." }
@@ -37,6 +38,10 @@ class ReceiptsController < ApplicationController
   private
 
   def receipt_params
-    params.require(:receipt).permit(:image, :seller, :total_amount, :date)
+    params.require(:receipt).permit(:seller, :receipt_number, :total_amount, :date, :note, :image)
+  end
+
+  def set_current_user
+    @current_user = User.find_by_email(session[:userinfo].email)
   end
 end

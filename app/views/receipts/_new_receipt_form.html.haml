@@ -1,0 +1,10 @@
+= form_for(Receipt.new, url: { controller: 'receipts', action: 'create' }, html: { multipart: true }) do |form|
+  .space-y-4
+    = form.text_field :seller, placeholder: 'Seller', class: 'block w-full rounded-lg border p-2'
+    = form.text_field :receipt_number, placeholder: 'Receipt Number', class: 'block w-full rounded-lg border p-2'
+    = form.number_field :total_amount, step: 0.01, placeholder: 'Total Amount', class: 'block w-full rounded-lg border p-2'
+    = form.date_field :date, placeholder: 'Date', class: 'block w-full rounded-lg border p-2'
+    = form.text_area :note, placeholder: 'Note', class: 'block w-full rounded-lg border p-2'
+    %label.block.mb-2.text-medium{for: "file_input"} Upload Receipt
+    = form.file_field :image, type: 'file', class: 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none dark:border-gray-600', id: 'file_input'
+    = form.submit 'Submit', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer'
