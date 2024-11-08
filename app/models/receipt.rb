@@ -2,6 +2,7 @@ class Receipt < ApplicationRecord
   has_one_attached :image
 
   validates :seller, presence: true
+  validates :description, presence: true
   validates :total_amount, presence: true, numericality: { greater_than_or_equal_to: 0 }, format: { with: /\A\d+(?:\.\d{1,2})?\z/ }
   validates :date, presence: true
   validates :image, presence: true
