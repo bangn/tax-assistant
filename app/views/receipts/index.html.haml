@@ -1,15 +1,19 @@
 .max-w-4xl.mx-auto.p-4.space-y-6
   .flex.items-center.justify-between
-    %h1.text-2xl.font-bold Manage your receipts
+    %h1.text-2xl.font-bold Add Receipt
   .space-y-4
-    - @receipts.each do |receipt|
-      .bg-white.rounded-lg.border.shadow-sm
-        .p-4
-          .flex.justify-between.items-center
-            %div
-              %h3.font-semibold= receipt.vendor
-              %p.text-sm.text-gray-600= receipt.category
-            .text-right
-              %p.font-semibold
-                $#{number_with_precision(receipt.amount, precision: 2)}
-              %p.text-sm.text-gray-600= receipt.date.strftime("%Y-%m-%d")
+    .container.mx-auto.border.p-4
+      = render 'new_receipt_form'
+    .container.mx-auto.border.p-4
+      %h1.text-2xl.font-bold Your receipts
+      - @receipts.each do |receipt|
+        .bg-white.rounded-lg.border.shadow-sm.mt-5
+          .p-4
+            .flex.justify-between.items-center
+              %div
+                %h3.font-semibold= receipt.seller
+                %p.text-sm.text-gray-600= receipt.receipt_number
+              .text-right
+                %p.font-semibold
+                  $#{number_with_precision(receipt.total_amount, precision: 2)}
+                %p.text-sm.text-gray-600= receipt.date.strftime("%Y-%m-%d")
