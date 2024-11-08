@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_06_194133) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_08_233218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -43,16 +43,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_06_194133) do
   end
 
   create_table "receipts", force: :cascade do |t|
-    t.string "receipt_number"
+    t.string "description", null: false
     t.integer "total_amount", null: false
-    t.string "seller"
+    t.string "seller", null: false
     t.string "note"
-    t.date "date"
+    t.date "date", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["date"], name: "index_receipts_on_date"
-    t.index ["receipt_number"], name: "index_receipts_on_receipt_number"
+    t.index ["description"], name: "index_receipts_on_description"
     t.index ["seller"], name: "index_receipts_on_seller"
     t.index ["total_amount"], name: "index_receipts_on_total_amount"
     t.index ["user_id"], name: "index_receipts_on_user_id"
