@@ -12,7 +12,7 @@
             .flex.justify-between.items-center
               %div
                 %h3.font-semibold= receipt.seller
-                %p.text-sm.text-gray-600= receipt.receipt_number
+                %p.text-sm.text-gray-600= receipt.description
               .text-right
                 %p.font-semibold
                   $#{number_with_precision(receipt.total_amount, precision: 2)}
