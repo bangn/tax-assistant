@@ -4,16 +4,21 @@ class ReceiptsController < ApplicationController
   before_action :set_current_user
 
   def index
-    @receipts = Receipt.all
+    @receipts = current_user.receipts
 
     # Handle search
     if params[:search].present?
-      @receipts = @receipts.where("seller ILIKE ?", "%#{params[:search]}%")
+      @receipts = @receipts.where("seller ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     end
 
     # Handle date filter
     if params[:date].present?
-      @receipts = @receipts.where(date: params[:date].to_date.all_day)
+      begin
+        date = Date.parse(params[:date])
+        @receipts = @receipts.where(date: date.all_day)
+      rescue ArgumentError
+        flash[:error] = "Invalid date format"
+      end
     end
 
     # Order by date descending

@@ -6,6 +6,11 @@
       = render 'new_receipt_form'
     .container.mx-auto.border.p-4
       %h1.text-2xl.font-bold Your receipts
+      = form_tag(receipts_path, method: 'get') do
+        .flex.items-center.justify-between
+          = text_field_tag :search, params[:search], placeholder: 'Search receipts'
+          = date_field_tag :date, params[:date]
+          = submit_tag 'Search', class: 'btn btn-primary'
       - @receipts.each do |receipt|
         .bg-white.rounded-lg.border.shadow-sm.mt-5
           .p-4
