@@ -2,15 +2,25 @@
   .flex.items-center.justify-between
     %h1.text-2xl.font-bold Add Receipt
   .space-y-4
-    .container.mx-auto.border.p-4
+    .container.mx-auto.border.p-4.rounded-lg
       = render 'new_receipt_form'
-    .container.mx-auto.border.p-4
+    .container.mx-auto.border.p-4.rounded-lg
       %h1.text-2xl.font-bold Your receipts
       = form_tag(receipts_path, method: 'get') do
-        .flex.items-center.justify-between
-          = text_field_tag :search, params[:search], placeholder: 'Search receipts'
-          = date_field_tag :date, params[:date]
-          = submit_tag 'Search', class: 'btn btn-primary'
+        .flex.flex-col.md:flex-row.items-start.md:items-start.border.rounded-lg.p-4.mt-4.space-y-4.md:space-y-0.md:space-x-4
+          .flex.flex-col{class: 'md:w-1/4'}
+            %label Filter
+            = text_field_tag :search, params[:search], class: 'border rounded-lg w-full'
+          .flex.flex-col{class: 'md:w-1/4'}
+            %label Start Date
+            = date_field_tag :start_date, params[:start_date], class: 'border rounded-lg w-full'
+          .flex.flex-col{class: 'md:w-1/4'}
+            %label End Date
+            = date_field_tag :end_date, params[:end_date], class: 'border rounded-lg w-full'
+          .flex.flex-col{class: 'md:w-1/4'}
+            %label &nbsp;
+            = submit_tag 'Search', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg w-full'
+
       - @receipts.each do |receipt|
         .bg-white.rounded-lg.border.shadow-sm.mt-5
           .p-4

@@ -4,7 +4,7 @@ class ReceiptsController < ApplicationController
   before_action :set_current_user
 
   def index
-    @receipts = current_user.receipts
+    @receipts = @current_user.receipts
 
     # Handle search
     if params[:search].present?
