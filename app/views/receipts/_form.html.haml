@@ -1,4 +1,5 @@
-= form_for(Receipt.new, url: { controller: 'receipts', action: 'create' }, html: { multipart: true }) do |form|
+- receipt ||= Receipt.new
+= form_for(receipt, html: { multipart: true }) do |form|
   .space-y-4
     = form.text_field :seller, placeholder: 'Seller', class: 'block w-full rounded-lg border p-2'
     = form.text_field :description, placeholder: 'Description', class: 'block w-full rounded-lg border p-2'
