@@ -3,7 +3,7 @@
     %h1.text-2xl.font-bold Add Receipt
   .space-y-4
     .container.mx-auto.border.p-4.rounded-lg
-      = render 'new_receipt_form'
+      = render 'form'
     .container.mx-auto.border.p-4.rounded-lg
       %h1.text-2xl.font-bold Your receipts
       = form_tag(receipts_path, method: 'get') do
@@ -28,7 +28,9 @@
               %div
                 %h3.font-semibold= receipt.seller
                 %p.text-sm.text-gray-600= receipt.description
-              .text-right
-                %p.font-semibold
-                  $#{number_with_precision(receipt.total_amount, precision: 2)}
-                %p.text-sm.text-gray-600= receipt.date.strftime("%Y-%m-%d")
+              .text-right.flex.items-center.space-x-4
+                %div
+                  %p.font-semibold
+                    $#{number_with_precision(receipt.total_amount, precision: 2)}
+                  %p.text-sm.text-gray-600= receipt.date.strftime("%Y-%m-%d")
+                = link_to 'Edit', edit_receipt_path(receipt), class: 'text-gray-600 hover:text-gray-900'
