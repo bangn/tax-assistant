@@ -1,4 +1,6 @@
 class Receipt < ApplicationRecord
+  include PgSearch::Model
+
   has_one_attached :image
 
   validates :seller, presence: true
@@ -7,6 +9,15 @@ class Receipt < ApplicationRecord
   validates :date, presence: true
   validates :image, presence: true
   validate :acceptable_attachment
+
+  pg_search_scope :fuzzy_search,
+    against: %w[seller description note],
+    using: {
+      tsearch: { prefix: true },
+      trigram: { threshold: 0.3, word_similarity: true }
+    }
+
+  scope :seller_similar, ->(seller) { where("seller % :seller", seller: seller) }
 
   private
 

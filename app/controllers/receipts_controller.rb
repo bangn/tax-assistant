@@ -6,22 +6,13 @@ class ReceiptsController < ApplicationController
   def index
     @receipts = @current_user.receipts
 
-    # Handle search
-    if params[:search].present?
-      @receipts = @receipts.where("seller ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
-    end
+    @receipts = handle_search(
+      receipts: @receipts,
+      search_text: params[:search],
+      start_date: params[:start_date],
+      end_date: params[:end_date],
+    )
 
-    # Handle date filter
-    if params[:date].present?
-      begin
-        date = Date.parse(params[:date])
-        @receipts = @receipts.where(date: date.all_day)
-      rescue ArgumentError
-        flash[:error] = "Invalid date format"
-      end
-    end
-
-    # Order by date descending
     @receipts = @receipts.order(date: :desc)
   end
 
@@ -67,5 +58,45 @@ class ReceiptsController < ApplicationController
 
   def set_current_user
     @current_user = User.find_by_email(session[:userinfo].email)
+  end
+
+  def handle_search(receipts:, search_text:, start_date:, end_date:)
+    # Filter by date first if it is present to reduce the query time
+    receipts = filter_by_date(
+      receipts: receipts,
+      start_date: start_date,
+      end_date: end_date,
+    )
+
+    # Then filter by search text
+    if search_text.present?
+      # receipts = receipts.where("seller ILIKE ? OR description ILIKE ?", "%#{search_text}%", "%#{search_text}%")
+      receipts = receipts.fuzzy_search(search_text)
+      # receipts = receipts.seller_similar(search_text)
+    end
+
+    receipts
+  end
+
+  def filter_by_date(receipts:, start_date:, end_date:)
+    if start_date.present?
+      begin
+        start_date = Date.parse(start_date)
+        receipts = receipts.where("date >= ?", start_date)
+      rescue ArgumentError
+        flash[:error] = "Invalid start date format"
+      end
+    end
+
+    if end_date.present?
+      begin
+        end_date = Date.parse(end_date)
+        receipts = receipts.where("date <= ?", end_date)
+      rescue ArgumentError
+        flash[:error] = "Invalid end date format"
+      end
+    end
+
+    receipts
   end
 end
