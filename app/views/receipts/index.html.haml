@@ -26,11 +26,17 @@
           .p-4
             .flex.justify-between.items-center
               %div
-                %h3.font-semibold= receipt.seller
-                %p.text-sm.text-gray-600= receipt.description
+                %h3.font-semibold
+                  = receipt.seller
+                %p.text-sm.text-gray-600
+                  = receipt.description
+                %p.text-sm.text-gray-600
+                  = link_to rails_blob_path(receipt.image, disposition: "attachment") do
+                    = image_tag "receipt.png", alt: "Download receipt"
               .text-right.flex.items-center.space-x-4
                 %div
                   %p.font-semibold
                     $#{number_with_precision(receipt.total_amount, precision: 2)}
-                  %p.text-sm.text-gray-600= receipt.date.strftime("%Y-%m-%d")
+                  %p.text-sm.text-gray-600
+                    = receipt.date.strftime("%Y-%m-%d")
                 = link_to 'Edit', edit_receipt_path(receipt), class: 'text-gray-600 hover:text-gray-900'

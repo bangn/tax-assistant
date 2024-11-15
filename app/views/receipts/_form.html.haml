@@ -6,7 +6,15 @@
     = form.number_field :total_amount, step: 0.01, placeholder: 'Total Amount', class: 'block w-full rounded-lg border p-2'
     = form.date_field :date, placeholder: 'Date', class: 'block w-full rounded-lg border p-2'
     = form.text_area :note, placeholder: 'Note', class: 'block w-full rounded-lg border p-2'
-    %label.block.mb-2.text-medium{for: "file_input"} Upload Receipt
+    - if receipt.image.representable?
+      %label.block.mb-2.text-medium Your Receipt
+      .container.rounded-lg.border
+        %p.text-sm.text-gray-600
+          = link_to rails_blob_path(receipt.image, disposition: "attachment") do
+            = image_tag receipt.image
+      %label.block.mb-2.text-medium{for: "file_input"} Upload New Receipt
+    - else
+      %label.block.mb-2.text-medium{for: "file_input"} Upload Receipt
     = form.file_field :image, type: 'file', class: 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none dark:border-gray-600', id: 'file_input'
     .flex.justify-between.items-center
       %div.ml-auto

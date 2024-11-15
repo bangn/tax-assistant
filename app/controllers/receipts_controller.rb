@@ -34,7 +34,7 @@ class ReceiptsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to receipts_path, alert: "Failed to upload receipt." }
+        format.html { redirect_to receipts_path, alert: "Failed to upload receipt. #{@receipt.errors.full_messages}" }
         format.json { render json: { success: false, errors: @receipt.errors.full_messages } }
       end
     end
@@ -53,7 +53,7 @@ class ReceiptsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render :edit, alert: "Failed to update receipt." }
+        format.html { render :edit, alert: "Failed to update receipt. #{@receipt.errors.full_messages}" }
         format.json { render json: { success: false, errors: @receipt.errors.full_messages } }
       end
     end
