@@ -7,11 +7,14 @@
     = form.date_field :date, placeholder: 'Date', class: 'block w-full rounded-lg border p-2'
     = form.text_area :note, placeholder: 'Note', class: 'block w-full rounded-lg border p-2'
     - if receipt.image.representable?
-      %label.block.mb-2.text-medium Your Receipt
-      .container.rounded-lg.border
-        %p.text-sm.text-gray-600
+      .flex.items-center.space-x-4
+        %span.text-medium
+          = "Your Receipt"
+        %span.text-sm.text-gray-600
           = link_to rails_blob_path(receipt.image, disposition: "attachment") do
-            = image_tag receipt.image
+            = image_tag "receipt.png", alt: "Download"
+      .container.rounded-lg.border
+        = image_tag receipt.image
       %label.block.mb-2.text-medium{for: "file_input"} Upload New Receipt
     - else
       %label.block.mb-2.text-medium{for: "file_input"} Upload Receipt
