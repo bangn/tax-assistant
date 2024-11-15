@@ -61,10 +61,18 @@ class ReceiptsController < ApplicationController
   end
 
   def handle_search(receipts:, search_text:, start_date:, end_date:)
+    # Filter by date first if it is present to reduce the query time
+    receipts = filter_by_date(receipts, start_date: start_date, end_date: end_date)
+
+    # Then filter by search text
     if search_text.present?
       receipts = receipts.where("seller ILIKE ? OR description ILIKE ?", "%#{search_text}%", "%#{search_text}%")
     end
 
+    receipts
+  end
+
+  def filter_by_date(receipts:, start_date:, end_date:)
     if start_date.present?
       begin
         start_date = Date.parse(start_date)
