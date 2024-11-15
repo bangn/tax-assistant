@@ -2,6 +2,7 @@ class ReceiptsController < ApplicationController
   include Secured
 
   before_action :set_current_user
+  before_action :set_receipt, only: [ :edit, :update, :destroy ]
 
   def index
     @receipts = @current_user.receipts
@@ -32,11 +33,9 @@ class ReceiptsController < ApplicationController
   end
 
   def edit
-    @receipt = @current_user.receipts.find(params[:id])
   end
 
   def update
-    @receipt = @current_user.receipts.find(params[:id])
     if @receipt.update(receipt_params)
       respond_to do |format|
         format.html { redirect_to receipts_path, notice: "Receipt was successfully updated." }
@@ -50,6 +49,20 @@ class ReceiptsController < ApplicationController
     end
   end
 
+  def destroy
+    if @receipt.destroy
+      respond_to do |format|
+        format.html { redirect_to receipts_path, notice: "Receipt was successfully deleted." }
+        format.json { render json: { success: true } }
+      end
+    else
+      respond_to do |format|
+        format.html { render :edit, alert: "Failed to delete receipt. #{@receipt.errors.full_messages}" }
+        format.json { render json: { success: false, errors: @receipt.errors.full_messages } }
+      end
+    end
+  end
+
   private
 
   def receipt_params
@@ -58,6 +71,10 @@ class ReceiptsController < ApplicationController
 
   def set_current_user
     @current_user = User.find_by_email(session[:userinfo].email)
+  end
+
+  def set_receipt
+    @receipt = @current_user.receipts.find(params[:id])
   end
 
   def handle_search(receipts:, search_text:, start_date:, end_date:)
