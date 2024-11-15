@@ -9,12 +9,12 @@
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
   %body.flex.flex-col.min-h-screen
-    // Header with login link
     %header.bg-white.border-b.border-gray-200
       .max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
         .flex.items-center.justify-between.h-16
-          .flex.items-center
-            Logo goes here
+          - if session[:userinfo]
+            .flex.items-center
+              = link_to "Receipts", receipts_path
 
           .flex.items-center.space-x-4
             - if session[:userinfo]
