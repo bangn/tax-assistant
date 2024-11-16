@@ -6,8 +6,9 @@
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     = csrf_meta_tags
     = csp_meta_tag
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload'
   %body.flex.flex-col.min-h-screen
     %header.bg-white.border-b.border-gray-200
       .max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
