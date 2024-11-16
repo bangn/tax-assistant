@@ -3,23 +3,23 @@
     %h1.text-2xl.font-bold Add Receipt
   .space-y-4
     .container.mx-auto.border.p-4.rounded-lg
-      = render 'form'
+      = render "form"
     .container.mx-auto.border.p-4.rounded-lg
       %h1.text-2xl.font-bold Your receipts
-      = form_tag(receipts_path, method: 'get') do
+      = form_tag(receipts_path, method: "get") do
         .flex.flex-col.md:flex-row.items-start.md:items-start.border.rounded-lg.p-4.mt-4.space-y-4.md:space-y-0.md:space-x-4
-          .flex.flex-col{class: 'md:w-1/4'}
+          .flex.flex-col{class: "md:w-1/4"}
             %label Filter
-            = text_field_tag :search, params[:search], class: 'border rounded-lg w-full'
-          .flex.flex-col{class: 'md:w-1/4'}
+            = text_field_tag :search, params[:search], class: "border rounded-lg w-full"
+          .flex.flex-col{class: "md:w-1/4"}
             %label Start Date
-            = date_field_tag :start_date, params[:start_date], class: 'border rounded-lg w-full'
-          .flex.flex-col{class: 'md:w-1/4'}
+            = date_field_tag :start_date, params[:start_date], class: "border rounded-lg w-full"
+          .flex.flex-col{class: "md:w-1/4"}
             %label End Date
-            = date_field_tag :end_date, params[:end_date], class: 'border rounded-lg w-full'
-          .flex.flex-col{class: 'md:w-1/4'}
+            = date_field_tag :end_date, params[:end_date], class: "border rounded-lg w-full"
+          .flex.flex-col{class: "md:w-1/4"}
             %label &nbsp;
-            = submit_tag 'Search', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg w-full'
+            = submit_tag "Search", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg w-full"
 
       - @receipts.each do |receipt|
         .bg-white.rounded-lg.border.shadow-sm.mt-5
@@ -31,12 +31,12 @@
                 %p.text-sm.text-gray-600
                   = receipt.description
                 %p.text-sm.text-gray-600
-                  = link_to rails_blob_path(receipt.image, disposition: "attachment") do
-                    = image_tag "receipt.png", alt: "Download receipt"
+                  - if receipt.image.attached?
+                    = link_to "Download receipt", rails_blob_path(receipt.image, disposition: "attachment")
               .text-right.flex.items-center.space-x-4
                 %div
                   %p.font-semibold
                     $#{number_with_precision(receipt.total_amount, precision: 2)}
                   %p.text-sm.text-gray-600
                     = receipt.date.strftime("%Y-%m-%d")
-                = link_to 'Edit', edit_receipt_path(receipt), class: 'text-gray-600 hover:text-gray-900'
+                = link_to "Edit", edit_receipt_path(receipt), class: "text-gray-600 hover:text-gray-900"

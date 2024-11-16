@@ -1,11 +1,11 @@
 - receipt ||= Receipt.new
 = form_for(receipt, html: { multipart: true }) do |form|
   .space-y-4
-    = form.text_field :seller, placeholder: 'Seller', class: 'block w-full rounded-lg border p-2'
-    = form.text_field :description, placeholder: 'Description', class: 'block w-full rounded-lg border p-2'
-    = form.number_field :total_amount, step: 0.01, placeholder: 'Total Amount', class: 'block w-full rounded-lg border p-2'
-    = form.date_field :date, placeholder: 'Date', class: 'block w-full rounded-lg border p-2'
-    = form.text_area :note, placeholder: 'Note', class: 'block w-full rounded-lg border p-2'
+    = form.text_field :seller, placeholder: "Seller", class: "block w-full rounded-lg border p-2"
+    = form.text_field :description, placeholder: "Description", class: "block w-full rounded-lg border p-2"
+    = form.number_field :total_amount, step: 0.01, placeholder: "Total Amount", class: "block w-full rounded-lg border p-2"
+    = form.date_field :date, placeholder: "Date", class: "block w-full rounded-lg border p-2"
+    = form.text_area :note, placeholder: "Note", class: "block w-full rounded-lg border p-2"
     - if receipt.image.representable?
       .flex.items-center.space-x-4
         %span.text-medium
@@ -18,7 +18,13 @@
       %label.block.mb-2.text-medium{for: "file_input"} Upload New Receipt
     - else
       %label.block.mb-2.text-medium{for: "file_input"} Upload Receipt
-    = form.file_field :image, type: 'file', class: 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none dark:border-gray-600', id: 'file_input'
+    = form.file_field :image, type: "file", class: "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none dark:border-gray-600", id: "file_input"
     .flex.justify-between.items-center
-      %div.ml-auto
-        = form.submit 'Save', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer'
+      %div.flex-grow
+        - if receipt.persisted?
+          = button_to "Delete", receipt_path(receipt),
+                      method: :delete,
+                      data: { confirm: "Are you sure you want to delete this receipt?" },
+                      class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer"
+      %div
+        = form.submit "Save", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer ml-auto"
