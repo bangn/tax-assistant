@@ -31,8 +31,8 @@
                 %p.text-sm.text-gray-600
                   = receipt.description
                 %p.text-sm.text-gray-600
-                  = link_to rails_blob_path(receipt.image, disposition: "attachment") do
-                    = image_tag "receipt.png", alt: "Download receipt"
+                  - if receipt.image.attached?
+                    = link_to "Download receipt", rails_blob_path(receipt.image, disposition: "attachment")
               .text-right.flex.items-center.space-x-4
                 %div
                   %p.font-semibold

@@ -25,4 +25,5 @@
         - if receipt.persisted?
           = button_to 'Delete', receipt_path(receipt),
                       method: :delete,
+                      data: { confirm: 'Are you sure you want to delete this receipt?' },
                       class: 'link-button'
