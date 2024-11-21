@@ -1,22 +1,22 @@
 .pagy {
-  @apply flex space-x-1 font-semibold text-sm text-gray-500;
+  @apply flex space-x-1 font-semibold text-sm text-green-500;
   a:not(.gap) {
-    @apply block rounded-lg px-3 py-1 bg-gray-200;
+    @apply block rounded-lg px-3 py-1 bg-green-200;
     &:hover {
-      @apply bg-gray-300;
+      @apply bg-green-300;
     }
     &:not([href]) {
       /* disabled links */
-      @apply text-gray-300 bg-gray-100 cursor-default;
+      @apply text-green-200 bg-green-100 cursor-default;
     }
     &.current {
-      @apply text-white bg-gray-400;
+      @apply text-white bg-green-400;
     }
   }
   label {
-    @apply inline-block whitespace-nowrap bg-gray-200 rounded-lg px-3 py-0.5;
+    @apply inline-block whitespace-nowrap bg-green-200 rounded-lg px-3 py-0.5;
     input {
-      @apply bg-gray-100 border-none rounded-md;
+      @apply bg-green-100 border-none rounded-md;
     }
   }
 }
