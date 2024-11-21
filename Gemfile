@@ -37,6 +37,7 @@ gem "omniauth-auth0"
 gem "omniauth-rails_csrf_protection"
 gem "haml-rails"
 gem "pg_search"
+gem "pagy"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
