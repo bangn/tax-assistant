@@ -87,9 +87,7 @@ class ReceiptsController < ApplicationController
 
     # Then filter by search text
     if search_text.present?
-      # receipts = receipts.where("seller ILIKE ? OR description ILIKE ?", "%#{search_text}%", "%#{search_text}%")
       receipts = receipts.fuzzy_search(search_text)
-      # receipts = receipts.seller_similar(search_text)
     end
 
     receipts
