@@ -40,3 +40,5 @@
                   %p.text-sm.text-gray-600
                     = receipt.date.strftime("%Y-%m-%d")
                 = link_to "Edit", edit_receipt_path(receipt), class: "text-gray-600 hover:text-gray-900"
+      .flex.justify-center.space-x-2.my-4
+        = pagy_nav(@pagy).html_safe if @pagy.pages > 1

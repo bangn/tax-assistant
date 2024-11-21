@@ -14,7 +14,7 @@ class ReceiptsController < ApplicationController
       end_date: params[:end_date],
     )
 
-    @receipts = @receipts.order(date: :desc)
+    @pagy, @receipts = pagy(@receipts.order(date: :desc))
   end
 
   def create

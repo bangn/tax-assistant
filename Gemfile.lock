@@ -229,6 +229,7 @@ GEM
     omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
+    pagy (9.1.1)
     parallel (1.26.3)
     parser (3.3.5.1)
       ast (~> 2.4.1)
@@ -406,6 +407,7 @@ DEPENDENCIES
   mini_magick
   omniauth-auth0
   omniauth-rails_csrf_protection
+  pagy
   pg (~> 1.1)
   pg_search
   pry-byebug
