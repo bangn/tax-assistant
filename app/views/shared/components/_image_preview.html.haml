@@ -1,0 +1,24 @@
+#receipt-preview-container.container.border.border-gray-300.rounded-lg.p-2{ style: 'display: none;' }
+  = image_tag '#',
+      id: 'receipt-preview',
+      alt: 'Receipt Preview'
+
+:javascript
+  function previewReceipt(event) {
+    const input = event.target;
+    const previewContainer = document.getElementById('receipt-preview-container');
+    const previewImage = document.getElementById('receipt-preview');
+
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        previewImage.src = e.target.result;
+        previewContainer.style.display = 'block';
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    } else {
+      previewContainer.style.display = 'none';
+    }
+  }
