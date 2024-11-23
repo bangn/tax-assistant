@@ -7,4 +7,3 @@
   %div.container.border.mt-5.border-gray-300.rounded-lg.p-2
     = link_to rails_blob_path(receipt.image, disposition: "attachment") do
       = image_tag receipt.image, title: "Download receipt"
-= render "shared/components/image_preview"
