@@ -1,0 +1,12 @@
+.relative.items-center
+  = form.file_field :image,
+      type: "file",
+      class: "absolute inset-0 w-full h-full opacity-0 cursor-pointer",
+      id: "file_input",
+      onchange: 'previewReceipt(event)',
+      direct_upload: true
+
+  .flex.items-center.justify-center.px-4.py-2.bg-white.border.border-gray-300.rounded-md.shadow-sm.hover:bg-gray-50
+    = heroicon "arrow-up-tray"
+    %span.ml-2.text-gray-600
+      = text
