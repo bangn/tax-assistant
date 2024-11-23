@@ -1,7 +1,7 @@
 - receipt ||= Receipt.new
 = form_for(receipt, html: { multipart: true }) do |form|
   .space-y-4
-    = render "receipt_form", form: form, receipt: receipt
-    = render "shared/components/image_preview"
     = render "shared/components/button/upload", form: form, text: "Upload receipt"
+    = render "shared/components/image_preview"
+    = render "receipt_form", form: form, receipt: receipt
     = render "shared/components/button/save", form: form
