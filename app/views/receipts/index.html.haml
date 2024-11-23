@@ -19,7 +19,11 @@
             = date_field_tag :end_date, params[:end_date], class: "border rounded-lg w-full"
           .flex.flex-col{class: "md:w-1/4"}
             %label &nbsp;
-            = submit_tag "Search", class: "bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg w-full"
+            %div.bg-green-500.hover:bg-green-600.text-white.font-bold.py-2.px-4.rounded-lg.w-full.flex.items-center.justify-center.gap-2
+              %div.flex-col
+                = heroicon "magnifying-glass"
+              %div.flex-col
+                = submit_tag "Search"
 
       - @receipts.each do |receipt|
         .bg-white.rounded-lg.border.shadow-sm.mt-5
