@@ -36,7 +36,10 @@
                   = receipt.description
                 %p.text-sm.text-gray-600
                   - if receipt.image.attached?
-                    = link_to "Download receipt", rails_blob_path(receipt.image, disposition: "attachment")
+                    = link_to heroicon("arrow-down-tray"),
+                        rails_blob_path(receipt.image, disposition: "attachment"),
+                        title: "Download receipt"
+
               .text-right.flex.items-center.space-x-4
                 %div
                   %p.font-semibold
