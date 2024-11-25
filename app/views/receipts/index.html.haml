@@ -6,33 +6,11 @@
       = render "new_receipt_form"
     .container.mx-auto.border.p-4.rounded-lg
       %h1.text-2xl.font-bold Your receipts
+
       = render "shared/components/search", path: receipts_path
       - @receipts.each do |receipt|
-        .bg-white.rounded-lg.border.shadow-sm.mt-5
-          .p-4
-            .flex.justify-between.items-center
-              %div
-                %h3.font-semibold
-                  = receipt.seller
-                %p.text-sm.text-gray-600
-                  = receipt.description
-                %p.text-sm.text-gray-600
-                  - if receipt.image.attached?
-                    = link_to heroicon("arrow-down-tray"),
-                        rails_blob_path(receipt.image, disposition: "attachment"),
-                        title: "Download receipt"
+        = render "receipt_list_item", receipt: receipt
 
-              .text-right.flex.items-center.space-x-4
-                %div
-                  %p.font-semibold
-                    $#{number_with_precision(receipt.total_amount, precision: 2)}
-                  %p.text-sm.text-gray-600
-                    = receipt.date.strftime("%Y-%m-%d")
-                %div
-                  = link_to heroicon("pencil-square"),
-                      edit_receipt_path(receipt),
-                      class: "text-gray-600 hover:text-gray-900",
-                      title: "Edit"
       - if @pagy.pages > 1
         .flex.justify-center.space-x-2.my-4
           = pagy_nav(@pagy).html_safe
