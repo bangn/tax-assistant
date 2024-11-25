@@ -1,15 +1,15 @@
 = form_tag(path, method: "get") do
   .flex.flex-col.md:flex-row.items-start.md:items-start.border.rounded-lg.p-4.mt-4.space-y-4.md:space-y-0.md:space-x-4
-    .flex.flex-col{class: "md:w-1/4"}
+    .flex.flex-col{class: "w-full"}
       %label Filter
-      = text_field_tag :search, params[:search], class: "border rounded-lg w-full"
-    .flex.flex-col{class: "md:w-1/4"}
+      = text_field_tag :search, params[:search], class: "border rounded-lg"
+    .flex.flex-col{class: "w-full"}
       %label Start Date
-      = date_field_tag :start_date, params[:start_date], class: "border rounded-lg w-full"
-    .flex.flex-col{class: "md:w-1/4"}
+      = date_field_tag :start_date, params[:start_date], class: "border rounded-lg"
+    .flex.flex-col{class: "w-full"}
       %label End Date
-      = date_field_tag :end_date, params[:end_date], class: "border rounded-lg w-full"
-    .flex.flex-col{class: "md:w-1/4"}
+      = date_field_tag :end_date, params[:end_date], class: "border rounded-lg"
+    .flex.flex-col{class: "w-full"}
       %label.hidden.lg:block &nbsp;
       = button_tag({ class: "bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg w-full flex items-center justify-center gap-2"}) do
         %div.bg-green-500.hover:bg-green-600.text-white.font-bold.py-2.px-4.rounded-lg.w-full.flex.items-center.justify-center.gap-2
