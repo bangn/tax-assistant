@@ -18,6 +18,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
+  ########################################
+  # Custom errors
+  ########################################
+  match "/404", to: "errors#not_found", via: :all
+
   resources :receipts do
     collection do
       get :export
