@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module RailsAuth0Exemplar
+module TaxAssistant
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     # config.load_defaults 7.2
@@ -23,5 +23,8 @@ module RailsAuth0Exemplar
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # This tells Rails to use routes for exceptions.
+    config.exceptions_app = self.routes
   end
 end
