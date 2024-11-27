@@ -10,10 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_15_052500) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_27_232342) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "category", ["income", "deduction"]
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_15_052500) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.enum "category", default: "deduction", null: false, enum_type: "category"
     t.index ["date"], name: "index_receipts_on_date"
     t.index ["description"], name: "index_receipts_on_description"
     t.index ["seller", "description", "note"], name: "index_receipts_on_seller_and_description_and_note", opclass: :gist_trgm_ops, using: :gist
