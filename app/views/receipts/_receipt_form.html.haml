@@ -3,19 +3,23 @@
   = form.text_field :seller, class: "block w-full rounded-lg border p-2"
 
 .space-y-1
-  %label.block.w-full{for: :seller} Description
+  %label.block.w-full{for: :description} Description
   = form.text_field :description, class: "block w-full rounded-lg border p-2"
 
 .space-y-1
-  %label.block.w-full{for: :seller} Amount
+  %label.block.w-full{for: :total_amount} Amount
   = form.number_field :total_amount, step: 0.01, class: "block w-full rounded-lg border p-2"
 
 .space-y-1
-  %label.block.w-full{for: :seller} Date
+  %label.block.w-full{for: :date} Date
   = form.date_field :date, class: "block w-full rounded-lg border p-2"
 
 .space-y-1
-  %label.block.w-full{for: :seller} Note
+  %label.block.w-full{for: :category} Category
+  = form.select :category, [["Deduction", "deduction"], ["Income", "income"]], { include_blank: false }, class: "block w-full rounded-lg border p-2"
+
+.space-y-1
+  %label.block.w-full{for: :note} Note
   = form.text_area :note, class: "block w-full rounded-lg border p-2"
 
 .space-y-1

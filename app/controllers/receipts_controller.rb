@@ -66,7 +66,7 @@ class ReceiptsController < ApplicationController
   private
 
   def receipt_params
-    params.require(:receipt).permit(:seller, :description, :total_amount, :date, :note, :image)
+    params.require(:receipt).permit(:seller, :description, :total_amount, :date, :note, :image, :category)
   end
 
   def set_current_user

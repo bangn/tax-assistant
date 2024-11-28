@@ -1,6 +1,8 @@
 class Receipt < ApplicationRecord
   include PgSearch::Model
 
+  CATEGORY = %w[deduction income]
+
   has_one_attached :image
 
   validates :seller, presence: true
@@ -8,6 +10,7 @@ class Receipt < ApplicationRecord
   validates :total_amount, presence: true, numericality: { greater_than_or_equal_to: 0 }, format: { with: /\A\d+(?:\.\d{1,2})?\z/ }
   validates :date, presence: true
   validates :image, presence: true
+  validates :category, inclusion: { in: CATEGORY }
   validate :acceptable_attachment
 
   pg_search_scope :fuzzy_search,
