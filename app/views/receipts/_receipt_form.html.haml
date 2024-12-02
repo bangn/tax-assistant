@@ -22,8 +22,8 @@
   %label.block.w-full{for: :note} Note
   = form.text_area :note, class: "block w-full rounded-lg border p-2"
 
-.space-y-1
-  - if receipt.image.representable?
+- if receipt.image.representable?
+  .space-y-1
     %div.container.border.mt-5.border-gray-300.rounded-lg.p-2
       = link_to rails_blob_path(receipt.image, disposition: "attachment") do
         = image_tag receipt.image, title: "Download receipt"

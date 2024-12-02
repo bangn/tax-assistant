@@ -43,7 +43,11 @@ class ReceiptsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render :edit, alert: "Failed to update receipt. #{@receipt.errors.full_messages}" }
+        format.html do
+          flash.now[:alert] = "Failed to update receipt. #{@receipt.errors.full_messages.first}"
+          render :edit
+        end
+
         format.json { render json: { success: false, errors: @receipt.errors.full_messages } }
       end
     end
