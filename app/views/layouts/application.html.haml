@@ -18,7 +18,7 @@
             %a.text-gray-600.hover:text-gray-900{:href => "/auth/logout"} Logout
         - else
           .flex.flex-row.justify-end.space-x-4.items-center.h-16
-            = link_to "Login", "/auth/auth0", class: "text-gray-600 hover:text-gray-900", data: { method: :post }
+            = button_to "Login", "/auth/auth0", class: "text-gray-600 hover:text-gray-900"
 
     // Main content
     %main.flex-grow
