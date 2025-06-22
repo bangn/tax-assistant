@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_27_232342) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_22_100630) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -49,7 +49,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_27_232342) do
 
   create_table "receipts", force: :cascade do |t|
     t.string "description", null: false
-    t.integer "total_amount", null: false
+    t.float "total_amount", null: false
     t.string "seller", null: false
     t.string "note"
     t.date "date", null: false
