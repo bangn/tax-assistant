@@ -2,13 +2,13 @@
   .flex.flex-col.md:flex-row.items-start.md:items-start.border.rounded-lg.p-4.mt-4.space-y-4.md:space-y-0.md:space-x-4
     .flex.flex-col.w-full
       %label Filter
-      = text_field_tag :search, params[:search], class: "border rounded-lg"
+      = text_field_tag :search, params[:search], class: "border rounded-lg p-2"
     .flex.flex-col.w-full
       %label Start Date
-      = date_field_tag :start_date, params[:start_date], class: "border rounded-lg"
+      = date_field_tag :start_date, params[:start_date], class: "border rounded-lg p-2"
     .flex.flex-col.w-full
       %label End Date
-      = date_field_tag :end_date, params[:end_date], class: "border rounded-lg"
+      = date_field_tag :end_date, params[:end_date], class: "border rounded-lg p-2"
     .flex.flex-col.w-full
       %label.hidden.lg:block &nbsp;
       = button_tag({ class: "bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg w-full flex items-center justify-center gap-2"}) do
