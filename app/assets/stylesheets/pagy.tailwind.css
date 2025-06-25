@@ -1,7 +1,7 @@
 .pagy {
   @apply flex space-x-1 font-semibold text-sm text-green-500;
   a:not(.gap) {
-    @apply block rounded-lg px-3 py-1 bg-green-200;
+    @apply block rounded-lg px-3 py-1 bg-green-200 mx-1;
     &:hover {
       @apply bg-green-300;
     }
