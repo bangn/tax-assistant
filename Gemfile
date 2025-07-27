@@ -54,6 +54,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "pry-byebug"
   gem "faker"
+  gem "rspec-rails"
 end
 
 group :development do
@@ -65,6 +66,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "shoulda-matchers"
+  gem "rails-controller-testing"
 end
 
 # ... existing gems ...
