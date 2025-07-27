@@ -21,10 +21,14 @@ class ReceiptsController < ApplicationController
         @pagy, @receipts = pagy(@receipts)
       end
       format.csv do
-        send_data CsvExport.new(@receipts).call,
-          filename: "receipts-#{Date.today}.csv",
-          type: "text/csv",
-          disposition: "attachment"
+        if params[:start_date].blank? || params[:end_date].blank?
+          redirect_to receipts_path, alert: "Please select a start and end date for the export."
+        else
+          send_data CsvExport.new(@receipts).call,
+            filename: "receipts-#{params[:start_date]}-#{params[:end_date]}.csv",
+            type: "text/csv",
+            disposition: "attachment"
+        end
       end
     end
   end
