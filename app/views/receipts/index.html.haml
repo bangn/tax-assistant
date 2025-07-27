@@ -5,11 +5,15 @@
     .container.mx-auto.border.p-4.rounded-lg
       = render "new_receipt_form"
     .container.mx-auto.border.p-4.rounded-lg
-      .flex.justify-between.items-center
-        %h1.text-2xl.font-bold Your receipts
-        = link_to "Export to CSV", receipts_path(format: :csv, search: params[:search], start_date: params[:start_date], end_date: params[:end_date]), class: "btn btn-primary"
+      %h1.text-2xl.font-bold.mb-4 Your receipts
 
       = render "shared/components/search", path: receipts_path
+
+      .flex.justify-end.my-4
+        = link_to receipts_path(format: :csv, search: params[:search], start_date: params[:start_date], end_date: params[:end_date]), class: "bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2" do
+          = heroicon "arrow-down-tray"
+          Export
+
       - @receipts.each do |receipt|
         = render "receipt_list_item", receipt: receipt
 
