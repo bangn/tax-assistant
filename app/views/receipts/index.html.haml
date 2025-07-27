@@ -5,7 +5,9 @@
     .container.mx-auto.border.p-4.rounded-lg
       = render "new_receipt_form"
     .container.mx-auto.border.p-4.rounded-lg
-      %h1.text-2xl.font-bold Your receipts
+      .flex.justify-between.items-center
+        %h1.text-2xl.font-bold Your receipts
+        = link_to "Export to CSV", receipts_path(format: :csv, search: params[:search], start_date: params[:start_date], end_date: params[:end_date]), class: "btn btn-primary"
 
       = render "shared/components/search", path: receipts_path
       - @receipts.each do |receipt|
