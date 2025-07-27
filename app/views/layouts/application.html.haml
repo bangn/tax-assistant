@@ -22,16 +22,19 @@
 
     // Main content
     %main.flex-grow
-      .max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
-        .flex.justify-center.items-center.space-x-4
-          // Flash messages
-          - flash.each do |key, value|
-            - if key == "alert"
-              .flash-alert
-                = value
-            - else
-              .flash-success
-                = value
+      - if session[:userinfo]
+        .max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
+          .flex.justify-center.items-center.space-x-4
+            // Flash messages
+            - flash.each do |key, value|
+              - if key == "alert"
+                .flash-alert
+                  = value
+              - else
+                .flash-success
+                  = value
+          = yield
+      - else
         = yield
 
     // Footer
