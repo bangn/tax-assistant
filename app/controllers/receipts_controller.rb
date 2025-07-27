@@ -14,7 +14,19 @@ class ReceiptsController < ApplicationController
       end_date: params[:end_date],
     )
 
-    @pagy, @receipts = pagy(@receipts.order(date: :desc))
+    @receipts = @receipts.order(date: :desc)
+
+    respond_to do |format|
+      format.html do
+        @pagy, @receipts = pagy(@receipts)
+      end
+      format.csv do
+        send_data CsvExport.new(@receipts).call,
+          filename: "receipts-#{Date.today}.csv",
+          type: "text/csv",
+          disposition: "attachment"
+      end
+    end
   end
 
   def create

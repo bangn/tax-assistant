@@ -25,7 +25,6 @@ Rails.application.routes.draw do
 
   resources :receipts do
     collection do
-      get :export
       get :capture
     end
   end
