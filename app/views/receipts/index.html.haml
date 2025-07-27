@@ -10,9 +10,10 @@
       = render "shared/components/search", path: receipts_path
 
       .flex.justify-end.my-4
-        = link_to receipts_path(format: :csv, search: params[:search], start_date: params[:start_date], end_date: params[:end_date]), class: "bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2" do
-          = heroicon "arrow-down-tray"
-          Export
+        - if params[:start_date].present? && params[:end_date].present?
+          = link_to receipts_path(format: :csv, search: params[:search], start_date: params[:start_date], end_date: params[:end_date]), class: "bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2" do
+            = heroicon "arrow-down-tray"
+            Export
 
       - @receipts.each do |receipt|
         = render "receipt_list_item", receipt: receipt
