@@ -25,7 +25,7 @@ class ReceiptsController < ApplicationController
           redirect_to receipts_path, alert: "Please select a start and end date for the export."
         else
           send_data CsvExport.new(@receipts).call,
-            filename: "receipts-#{Date.today}.csv",
+            filename: "receipts-#{params[:start_date]}-#{params[:end_date]}.csv",
             type: "text/csv",
             disposition: "attachment"
         end
